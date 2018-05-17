@@ -52,6 +52,38 @@ class LinkedList {
     return currNode;
   }
 
+  insertBefore(head, data, position) {
+      if (!head) {
+          head = new _Node(data);
+      }
+      else {
+          let parent = null;
+          let current = head;
+          let index = 0;
+      
+          while (current && index < position) {
+              parent = current;
+              current = current.next;
+              index++;
+          }
+  
+          if (current) {
+              // Insert node here, make the child current.
+              var child = new _Node(current.data);
+              child.next = current.next;
+              
+              current.data = data;
+              current.next = child;
+          }
+          else {
+              // Insert node at end of list.
+              parent.next = new _Node(data);
+          }
+      }
+      
+      return head;
+  }
+
   remove(item) {
     if (!this.head) {
       return null;
@@ -86,8 +118,11 @@ function main() {
   list.insertLast('Helo');
   list.insertLast('Husker');
   list.insertLast('Starbuck');
+  list.insertLast('Tauhida');
+  list.remove('Starbuck')
+  list.insertBefore('Tauhida', 'Kevin', 1);
 
-  console.log(list);
+  console.log(list.head.next.next.next);
 }
 
 main();
