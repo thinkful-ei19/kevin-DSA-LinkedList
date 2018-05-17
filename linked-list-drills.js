@@ -1,6 +1,6 @@
 'use strict';
 
-// NODE CLASS
+// ===NODE CLASS===
 
 class _Node {
   constructor(value, next) {
@@ -9,7 +9,7 @@ class _Node {
   }
 }
 
-// LINKED LIST CLASS
+// ===LINKED LIST CLASS===
 
 class LinkedList {
 
@@ -92,7 +92,7 @@ class LinkedList {
 
   // INSERT AFTER
 
-  insertAfter(target, newValue){
+  insertAfter(target, newValue) {
 
     if (this.head === null) {
       this.insertFirst(newValue);
@@ -102,7 +102,7 @@ class LinkedList {
 
     let currNode = this.head;
     let nextNode = this.head;
-    while((currNode.value !== target) && (currNode !== null)){
+    while ((currNode.value !== target) && (currNode !== null)) {
       currNode = nextNode;
       nextNode = currNode.next;
     }
@@ -168,22 +168,103 @@ class LinkedList {
   }
 }
 
+// ===MAIN FUNCTION===
+
+const SLL = new LinkedList();
+
 function main() {
-  let list = new LinkedList();
-
-  list.insertFirst('Apollo');
-  list.insertLast('Boomer');
-  list.insertLast('Helo');
-  list.insertLast('Husker');
-  list.insertLast('Starbuck');
-  list.insertFirst('Tauhida');
-  list.remove('Starbuck');
-  list.insertBefore('Boomer', 'Athena');
-  list.insertAfter('Helo', 'Hotdog');
-  list.insertAt('Kat', 3);
-  list.remove('Tauhida');
-
-  console.log(JSON.stringify(list));
+  SLL.insertFirst('Apollo');
+  SLL.insertLast('Boomer');
+  SLL.insertLast('Helo');
+  SLL.insertLast('Husker');
+  SLL.insertLast('Starbuck');
+  SLL.insertFirst('Tauhida');
+  SLL.remove('Starbuck');
+  SLL.insertBefore('Boomer', 'Athena');
+  SLL.insertAfter('Helo', 'Hotdog');
+  SLL.insertAt('Kat', 3);
+  SLL.remove('Tauhida');
+  // console.log(JSON.stringify(SLL));
 }
 
+// ===SUPPLEMENTAL FUNCTIONS===
+
+// DISPLAY
+
+function display(list) {
+  if (list.head) {
+    console.log(list.head.value);
+  } else {
+    console.log('ain\'t no list boy');
+  }
+  let currNode = list.head;
+  while (currNode.next !== null) {
+    console.log(currNode.next.value);
+    currNode = currNode.next;
+  }
+}
+
+// SIZE
+
+function size(list) {
+  let counter = 0;
+  if (list.head) {
+    counter = 1;
+  } else {
+    console.log('ain\'t no list boy');
+    return;
+  }
+  let currNode = list.head;
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+    counter++;
+  }
+
+  console.log(counter);
+  return counter;
+}
+
+// IS EMPTY
+
+function isEmpty(list) {
+  list.head ? console.log('no, the list is not empty') : console.log('yep, the list is empty');
+}
+
+// FIND PREVIOUS
+
+function findPrevious(list, item) {
+  if (!list.head) {
+    return;
+  }
+  let currNode = list.head;
+  let prevNode = list.head;
+  while (currNode.value !== item) {
+    prevNode = currNode;
+    currNode = currNode.next;
+  }
+  console.log(prevNode.value);
+  return prevNode.value;
+}
+
+// FIND LAST
+
+function findLast(list) {
+  if (!list.head) {
+    return;
+  }
+  let currNode = list.head;
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+  }
+  console.log(currNode.value);
+  return currNode.value;
+}
+
+// ===INVOCATIONS===
+
 main();
+display(SLL);
+size(SLL);
+isEmpty(SLL);
+findPrevious(SLL, 'Boomer');
+findLast(SLL);
