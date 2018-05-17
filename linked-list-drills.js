@@ -178,6 +178,7 @@ function main() {
   SLL.insertLast('Helo');
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
+  SLL.insertLast('Helo');
   SLL.insertFirst('Tauhida');
   SLL.remove('Starbuck');
   SLL.insertBefore('Boomer', 'Athena');
@@ -325,7 +326,8 @@ function thirdFromTheEnd(list) {
 }
 
 // MIDDLE OF A LIST
-//
+// O(n) - linear because the runtime increases in direct 
+// proportion to the input
 
 function middleOfAList(list) {
   let counter = 0;
@@ -334,29 +336,49 @@ function middleOfAList(list) {
     currNode = currNode.next;
     counter++;
   }
-  let middle = Math.floor(counter/2);
+  let middle = Math.floor(counter / 2);
   let counterTwo = 0;
   currNode = list.head;
-  while ( counterTwo !== middle) {
+  while (counterTwo !== middle) {
     currNode = currNode.next;
     counterTwo++;
   }
   console.log(currNode.value);
   return currNode;
 
-    // if (!list.head) return;
-  
-    // let fast = list.head;
-    // let slow = list.head;
-  
-    // while (fast !== null && fast.next !== null) {
-    //   fast = fast.next.next;
-    //   slow = slow.next;
-    // }
-  
-    // console.log(slow.value);
+  // if (!list.head) return;
+
+  // let fast = list.head;
+  // let slow = list.head;
+
+  // while (fast !== null && fast.next !== null) {
+  //   fast = fast.next.next;
+  //   slow = slow.next;
+  // }
+
+  // console.log(slow.value);
 }
 
+// CYCLE IN A LIST
+//
+
+function cycle(list) {
+
+}
+
+// DOUBLY LINKED LIST
+// 
+
+function doublyLinkedList(list) {
+
+}
+
+// REVERSE A DLL
+//
+
+function reverseDLL(list) {
+
+}
 
 // ===INVOCATIONS===
 
@@ -369,3 +391,6 @@ display(SLL);
 // reverseList(SLL);
 // thirdFromTheEnd(SLL);
 // middleOfAList(SLL);
+cycle(SLL);
+// doublyLinkedList(SLL);
+// reverseDLL(SLL);
