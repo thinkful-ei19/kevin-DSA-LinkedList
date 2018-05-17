@@ -93,9 +93,13 @@ class LinkedList {
   // INSERT AFTER
 
   insertAfter(target, newValue){
-    if(this.head === null){
+
+    if (this.head === null) {
       this.insertFirst(newValue);
+    } else if (!this.head.next) {
+      this.insertLast(newValue);
     }
+
     let currNode = this.head;
     let nextNode = this.head;
     while((currNode.value !== target) && (currNode !== null)){
@@ -108,27 +112,31 @@ class LinkedList {
 
   // INSERT AT
 
-  insertAt(index, newNode) {
+  insertAt(newValue, position) {
 
     if (this.head === null) {
-      this.insertFirst(newNode);
+      this.insertFirst(newValue);
     } else if (!this.head.next) {
-      this.insertLast(newNode);
+      this.insertLast(newValue);
     }
 
     let currNode = this.head;
+    let previousNode = this.head;
     let counter = 0;
 
-    while (counter !== index) {
+    while (counter !== position) {
 
-      if (!currNode.next) this.insertLast(newNode);
+      if (!currNode.next) this.insertLast(newValue);
 
+      previousNode = currNode;
       currNode = currNode.next;
       counter++;
     }
 
-    let newItem = new _Node(newNode);
-    currNode.next = new _Node(newNode, currNode);
+    let newItem = new _Node(newValue);
+
+    newItem.next = currNode;
+    previousNode.next = newItem;
 
   }
 
@@ -169,9 +177,11 @@ function main() {
   list.insertLast('Husker');
   list.insertLast('Starbuck');
   list.insertFirst('Tauhida');
-  list.remove('Starbuck')
+  list.remove('Starbuck');
   list.insertBefore('Boomer', 'Athena');
   list.insertAfter('Helo', 'Hotdog');
+  list.insertAt('Kat', 3);
+  list.remove('Tauhida');
 
   console.log(JSON.stringify(list));
 }
