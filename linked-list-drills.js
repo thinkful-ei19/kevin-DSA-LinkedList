@@ -324,6 +324,39 @@ function thirdFromTheEnd(list) {
   return currNode;
 }
 
+// MIDDLE OF A LIST
+//
+
+function middleOfAList(list) {
+  let counter = 0;
+  let currNode = list.head;
+  while (currNode !== null) {
+    currNode = currNode.next;
+    counter++;
+  }
+  let middle = Math.floor(counter/2);
+  let counterTwo = 0;
+  currNode = list.head;
+  while ( counterTwo !== middle) {
+    currNode = currNode.next;
+    counterTwo++;
+  }
+  console.log(currNode.value);
+  return currNode;
+
+    // if (!list.head) return;
+  
+    // let fast = list.head;
+    // let slow = list.head;
+  
+    // while (fast !== null && fast.next !== null) {
+    //   fast = fast.next.next;
+    //   slow = slow.next;
+    // }
+  
+    // console.log(slow.value);
+}
+
 
 // ===INVOCATIONS===
 
@@ -334,4 +367,5 @@ display(SLL);
 // findPrevious(SLL, 'Boomer');
 // findLast(SLL);
 // reverseList(SLL);
-thirdFromTheEnd(SLL);
+// thirdFromTheEnd(SLL);
+middleOfAList(SLL);
