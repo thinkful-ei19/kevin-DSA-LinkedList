@@ -260,11 +260,78 @@ function findLast(list) {
   return currNode.value;
 }
 
+// ===INTERVIEW QUESTIONS===
+
+// MYSTERY PROGRAM
+
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head;
+  while (current !== null) {
+    let newNode = current;
+    while (newNode.next !== null) {
+      if (newNode.next.value === current.value) {
+        newNode.next = newNode.next.next;
+      }
+      else {
+        newNode = newNode.next;
+      }
+    }
+    current = current.next;
+  }
+}
+
+// What is it trying to do?
+// This program removes duplicates from a linked list. 
+// It will remove the 2nd and later occurrences of 
+// the linked list - will not preserve the order of the list
+
+// What is the runtime algorithm?
+// O(n^2) - polynomial because it has a nest loop
+
+// ~~~~~~~~~~
+
+// REVERSE LIST
+// O(n) - linear because it changes nodes one at a time
+// ********
+
+function reverseList(list) {
+  if (!list.head) {
+    return;
+  }
+  let currNode = list.head;
+  let nextNode = null;
+  let previousNode = null;
+  while (currNode !== null) {
+    nextNode = currNode.next;
+    currNode.next = previousNode;
+    previousNode = currNode;
+    currNode = nextNode;
+  }
+  list.head = previousNode;
+  console.log(JSON.stringify(list));
+  return list;
+}
+
+// THIRD FROM THE END
+// O(n) - linear because it checks nodes one at a time
+
+function thirdFromTheEnd(list) {
+  let currNode = list.head;
+  while (currNode.next.next.next !== null) {
+    currNode = currNode.next;
+  }
+  console.log(currNode);
+  return currNode;
+}
+
+
 // ===INVOCATIONS===
 
 main();
 display(SLL);
-size(SLL);
-isEmpty(SLL);
-findPrevious(SLL, 'Boomer');
-findLast(SLL);
+// size(SLL);
+// isEmpty(SLL);
+// findPrevious(SLL, 'Boomer');
+// findLast(SLL);
+// reverseList(SLL);
+thirdFromTheEnd(SLL);
