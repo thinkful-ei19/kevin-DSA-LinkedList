@@ -52,36 +52,25 @@ class LinkedList {
     return currNode;
   }
 
-  insertBefore(head, data, position) {
-      if (!head) {
-          head = new _Node(data);
-      }
-      else {
-          let parent = null;
-          let current = head;
-          let index = 0;
-      
-          while (current && index < position) {
-              parent = current;
-              current = current.next;
-              index++;
-          }
-  
-          if (current) {
-              // Insert node here, make the child current.
-              var child = new _Node(current.data);
-              child.next = current.next;
-              
-              current.data = data;
-              current.next = child;
-          }
-          else {
-              // Insert node at end of list.
-              parent.next = new _Node(data);
-          }
-      }
-      
-      return head;
+  insertBefore(nextNode, item) {
+    if (this.head === null) {
+      this.insertFirst(item);
+    }
+
+    let currNode = this.head;
+    let prevNode = this.head;
+
+    while ((currNode !== null) && (currNode.value !== nextNode) ) {
+      prevNode = currNode;
+      currNode = currNode.next;
+    }
+
+    if (currNode === null) {
+      console.log('item not on list');
+      return;
+    }
+
+    prevNode.next = new _Node(item, currNode);
   }
 
   remove(item) {
@@ -122,7 +111,7 @@ function main() {
   list.remove('Starbuck')
   list.insertBefore('Tauhida', 'Kevin', 1);
 
-  console.log(list.head.next.next.next);
+  console.log(JSON.stringify(list));
 }
 
 main();
