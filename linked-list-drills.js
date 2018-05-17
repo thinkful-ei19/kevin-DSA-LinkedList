@@ -1,5 +1,6 @@
 'use strict';
 
+// NODE CLASS
 
 class _Node {
   constructor(value, next) {
@@ -8,14 +9,23 @@ class _Node {
   }
 }
 
+// LINKED LIST CLASS
+
 class LinkedList {
+
+  // CONSTRUCTOR
+
   constructor() {
     this.head = null;
   }
 
+  // INSERT FIRST
+
   insertFirst(item) {
     this.head = new _Node(item, this.head);
   }
+
+  // INSERT LAST
 
   insertLast(item) {
     if (this.head === null) {
@@ -29,6 +39,8 @@ class LinkedList {
       tempNode.next = new _Node(item, null);
     }
   }
+
+  // FIND
 
   find(item) {
     //start at the head
@@ -52,15 +64,20 @@ class LinkedList {
     return currNode;
   }
 
-  insertBefore(nextNode, item) {
+  // INSERT BEFORE
+
+  insertBefore(targetNode, newNode) {
+
     if (this.head === null) {
-      this.insertFirst(item);
+      this.insertFirst(newNode);
+    } else if (!this.head.next) {
+      this.insertLast(newNode);
     }
 
     let currNode = this.head;
     let prevNode = this.head;
 
-    while ((currNode !== null) && (currNode.value !== nextNode) ) {
+    while ((currNode !== null) && (currNode.value !== targetNode)) {
       prevNode = currNode;
       currNode = currNode.next;
     }
@@ -70,8 +87,52 @@ class LinkedList {
       return;
     }
 
-    prevNode.next = new _Node(item, currNode);
+    prevNode.next = new _Node(newNode, currNode);
   }
+
+  // INSERT AFTER
+
+  insertAfter(target, newValue){
+    if(this.head === null){
+      this.insertFirst(newValue);
+    }
+    let currNode = this.head;
+    let nextNode = this.head;
+    while((currNode.value !== target) && (currNode !== null)){
+      currNode = nextNode;
+      nextNode = currNode.next;
+    }
+    let newItem = new _Node(newValue, nextNode);
+    currNode.next = newItem;
+  }
+
+  // INSERT AT
+
+  insertAt(index, newNode) {
+
+    if (this.head === null) {
+      this.insertFirst(newNode);
+    } else if (!this.head.next) {
+      this.insertLast(newNode);
+    }
+
+    let currNode = this.head;
+    let counter = 0;
+
+    while (counter !== index) {
+
+      if (!currNode.next) this.insertLast(newNode);
+
+      currNode = currNode.next;
+      counter++;
+    }
+
+    let newItem = new _Node(newNode);
+    currNode.next = new _Node(newNode, currNode);
+
+  }
+
+  // REMOVE
 
   remove(item) {
     if (!this.head) {
@@ -107,9 +168,10 @@ function main() {
   list.insertLast('Helo');
   list.insertLast('Husker');
   list.insertLast('Starbuck');
-  list.insertLast('Tauhida');
+  list.insertFirst('Tauhida');
   list.remove('Starbuck')
-  list.insertBefore('Tauhida', 'Kevin', 1);
+  list.insertBefore('Boomer', 'Athena');
+  list.insertAfter('Helo', 'Hotdog');
 
   console.log(JSON.stringify(list));
 }
